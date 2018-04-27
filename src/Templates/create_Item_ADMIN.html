@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <form class="form-signin" action="{{ url_for('Item.create_item') }}" method="post">
+            <h1 style="text-align: center;" class="form-signin-heading"><strong>Create Item</strong></h1>
+
+            <label for="title" class="sr-only">Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+
+            <label for="description" class="sr-only">Description</label>
+            <input type="text" class="form-control" id="description" name="description" placeholder="description">
+
+            <label for="size" class="sr-only">Size</label>
+            <input type="text" class="form-control" id="size" name="size" placeholder="S">
+
+            <label for="category" class="sr-only">Category (refer to legend)</label>
+            <input type="number" class="form-control" id="category" name="category" placeholder="category">
+
+            <label for="price" class="sr-only">Price</label>
+            <input type="number" class="form-control" id="price" name="price" placeholder="0.00">
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">
+        </form>
+        <h4 style="text-align:center">category legend</h4>
+        <p style="text-align:center">
+            1-Girls
+            2-Boys
+            3-Women's
+            4-Accessories
+            5-Aprons
+
+        </p>
+    </div>
+
+{% endblock %}

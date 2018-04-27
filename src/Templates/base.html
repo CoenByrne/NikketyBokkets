@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Nikketty Bokketts</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/homeStyle.css') }}"/>
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+	    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a style="padding-top:15px;" class="navbar-brand" href="{{ url_for('home') }}">Nikketty Bokketts</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#about">About</a></li>
+
+            <!--
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Girls<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Catagory</a></li>
+                <li><a href="#">Catagory</a></li>
+                <li><a href="#">Catagory</a></li>
+              </ul>
+			</li>
+            -->
+            <li><a href="{{ url_for('Item.item_view_girls') }}">Girls</a></li>
+            <li><a href="{{ url_for('Item.item_view_boys') }}">Boys</a></li>
+            <li><a href="{{ url_for('Item.item_view_women') }}">Womens</a></li>
+            <li><a href="{{ url_for('Item.item_view_accessories') }}">Accessories</a></li>
+            <li><a href="{{ url_for('Item.item_view_aprons') }}">Aprons</a></li>
+            <li><a href="{{ url_for('ShoppingCart.too_cart') }}">Cart</a></li>
+
+              <!-- Admin ONLY -->
+            <li><a href="{{ url_for('Item.create_item') }}">Create Item</a></li>
+          </ul>
+          <a style="float:right;" class="btn btn-success" href="{{ url_for('User.register_user') }}" role="button">Sign up</a>
+          <a style="float:right;" class="btn btn-primary" href="{{ url_for('User.login_user') }}" role="button">Sign in</a>
+        </div><!--/.nav-collapse -->
+
+      </div>
+
+    </nav>
+	<div class="whiteSpaceTop"></div>
+     {% block content %}
+
+
+    {% endblock %}
+	<div class="whiteSpaceBottom"></div>
+    <footer class="footer">
+      <div class="container">
+          <a style="padding-left:5px;padding-right:5px;" href=""> Payment Options </a>
+          <a style="padding-left:5px;padding-right:5px;" href=""> Postage </a>
+          <a style="padding-left:5px;padding-right:5px;" href=""> Terms & Conditions </a>
+      </div>
+    </footer>
+</body>
+
+</html>

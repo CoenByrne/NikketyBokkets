@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        {% for item in items %}
+
+            <div class="panel panel-primary" style="width:33%;float:left;position:relative;">
+            {% if item.title %}
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ item.title }}</h3>
+                </div>
+            {% endif %}
+            <div class="panel-body">
+            {% if item.description %}
+                <h5>description: {{ item.description }}</h5>
+            {% endif %}
+            {% if item.size %}
+                <h5>size: {{ item.size }}</h5>
+            {% endif %}
+            {% if item.category %}
+                <h5>category: {{ item.category }}</h5>
+            {% endif %}
+            {% if item.price %}
+                <h5>price: {{ item.price }}</h5>
+            {% endif %}
+                <form action="{{ url_for('Item.buy_item') }}" method="POST">
+                    <button type="submit" name="Buy" value="{{ item._id }}">BUY!</button>
+                </form>
+            </div>
+            <br>
+            </div>
+            <div style="width:0.5%;height:50px;float:left;"></div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+
+

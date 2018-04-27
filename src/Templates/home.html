@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="jumbotron">
+        <h1>Welcome</h1>
+        <p class="lead">Business description
+        <p>
+            <a href="{{ url_for('User.login_user') }}" class="btn btn-lg btn-primary" role="button">Log In</a>
+            <a class="btn btn-lg btn-success" href="{{ url_for('User.register_user') }}" role="button">Sign up today</a>
+        </p>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,1 @@
+COLLECTION = "shopping_cart"
