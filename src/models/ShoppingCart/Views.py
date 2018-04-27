@@ -24,8 +24,9 @@ def empty_cart():
 
 @shopping_cart_blueprint.route("/remove", methods=['POST'])
 def remove_item():
-    cart = Database.find_one(ShoppingCartConstants.COLLECTION, {"user_email": session["email"]})
-    items = ShoppingCart.find_items(cart)
-    items.remove(request.form["remove"])
+    cart = ShoppingCart.find_by_user_id(session["email"])
+    cart_ids = cart.shopping_list
+    cart_ids.remove(request.form["remove"])
     Database.update(ShoppingCartConstants.COLLECTION, {"user_email": session["email"]}, cart.json(cart))
-    return render_template("shopping_cart.html")
+    items = ShoppingCart.find_items(cart.json(cart))
+    return render_template("shopping_cart.html", items=items)

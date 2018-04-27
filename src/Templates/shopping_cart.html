@@ -5,8 +5,8 @@
         {% for item in items %}
             <h3>{{ item.title }}</h3>
             <h4>{{ item.price }}</h4>
-            <form action="{{ url_for('Item.buy_item') }}" method="POST">
-                    <button type="submit" name="Buy" value="{{ item._id }}">BUY!</button>
+            <form action="{{ url_for('ShoppingCart.remove_item') }}" method="POST">
+                    <button type="submit" name="remove" value="{{ item._id }}">Remove</button>
             </form>
         {% endfor %}
     {% endif %}

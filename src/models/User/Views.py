@@ -1,4 +1,5 @@
 from flask import Blueprint, request, session, render_template
+from src import config
 
 from src.models.ShoppingCart.ShoppingCart import ShoppingCart
 from src.models.User.User import User
@@ -15,6 +16,9 @@ def register_user():
             session['email'] = email
             cart = ShoppingCart("00:00", False, email)
             cart.save_to_db()
+            session['logged'] = True
+            if email in config.ADMINS:
+                session["admin"] = True
             return render_template("home.html")
     return render_template("register.html")
 
@@ -26,6 +30,9 @@ def login_user():
         password = request.form['password']
         if User.login_user(email, password):
             session['email'] = email
+            session['logged'] = True
+            if email in config.ADMINS:
+                session["admin"] = True
             return render_template("home.html")
         else:
             print("Wrong password")

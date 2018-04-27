@@ -7,6 +7,7 @@ from src.models.Item.Views import item_blueprint
 from src.models.User.Views import user_blueprint
 from src.models.ShoppingCart.Views import shopping_cart_blueprint
 from src.models.Review.Views import review_blueprint
+from src import config
 app = Flask(__name__)
 app.secret_key = "123"
 
@@ -18,7 +19,12 @@ def init_db():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    admin = False
+    if "admin" not in session.keys():
+        session["admin"] = False
+        return render_template('home.html')
+    else:
+        return render_template('home.html')
 
 
 app.register_blueprint(user_blueprint, url_prefix="/users")

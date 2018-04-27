@@ -25,21 +25,16 @@
                 <form action="{{ url_for('Item.buy_item') }}" method="POST">
                     <button type="submit" name="Buy" value="{{ item._id }}">BUY!</button>
                 </form>
+                {% if session["admin"] == True %}
+                <form action="{{ url_for('Item.go_to_update_item') }}" method="POST">
+                    <button type="submit" name="Edit" value="{{ item._id }}">EDIT</button>
+                </form>
+                {% endif %}
             </div>
             <br>
             </div>
             <div style="width:0.5%;height:50px;float:left;"></div>
         {% endfor %}
+    </div>
 
     {% endblock %}
-
-          <div>
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-
-    </div>

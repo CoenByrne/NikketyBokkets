@@ -46,10 +46,14 @@
             <li><a href="{{ url_for('ShoppingCart.too_cart') }}">Cart</a></li>
 
               <!-- Admin ONLY -->
-            <li><a href="{{ url_for('Item.create_item') }}">Create Item</a></li>
+            {% if session["admin"] == True %}
+                <li><a href="{{ url_for('Item.create_item') }}">Create Item</a></li>
+            {% endif %}
           </ul>
-          <a style="float:right;" class="btn btn-success" href="{{ url_for('User.register_user') }}" role="button">Sign up</a>
-          <a style="float:right;" class="btn btn-primary" href="{{ url_for('User.login_user') }}" role="button">Sign in</a>
+            {% if "logged" not in session.keys() %}
+                <a style="float:right;" class="btn btn-success" href="{{ url_for('User.register_user') }}" role="button">Sign up</a>
+                <a style="float:right;" class="btn btn-primary" href="{{ url_for('User.login_user') }}" role="button">Sign in</a>
+            {% endif %}
         </div><!--/.nav-collapse -->
 
       </div>

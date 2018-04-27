@@ -5,11 +5,12 @@ from src.models.Item import ItemConstants
 from src.models.Item.Item import Item
 from src.models.ShoppingCart import ShoppingCartConstants
 from src.models.ShoppingCart.ShoppingCart import ShoppingCart
-
+import src.models.User.decorators as user_decorators
 item_blueprint = Blueprint("Item", __name__)
 
 
 @item_blueprint.route('/create', methods=['GET', 'POST'])
+@user_decorators.requires_admin_permission
 def create_item():
     if request.method == 'POST':
         title = request.form["title"]
@@ -56,29 +57,23 @@ def remove_item():
 
 # this also needs updating.
 @item_blueprint.route('/update', methods=['GET', 'POST'])
-def update_item():
-    if request.method == 'POST':
-        # used to find item in the database
-        title_old = request.form["title_old"]
-        colour_old = request.form["colour_old"]
-        size_old = request.form["size_old"]
+def go_to_update_item():
+    _id = request.form["Edit"]
+    item = Database.find_one(ItemConstants.COLLECTION, {"_id": _id})
+    return render_template("edit_item.html", item=item)
 
-        # new values for that item
-        title_new = request.form["title_new"]
-        colour_new = request.form["colour_new"]
-        size_new = request.form["size_new"]
-        material_new = request.form["material_new"]
-        price_new = request.form["price_new"]
-        dic = {}
-        if title_old != "":
-            dic += {"title": title_old}
-        if colour_old != "":
-            dic += {"colour": colour_old}
-        if size_old != "":
-            dic += {"size": size_old}
-        else:
-            item = Item(title_new, colour_new, size_new, material_new, price_new)
-            Database.update(ItemConstants.COLLECTION, dic, item.json())
+
+@item_blueprint.route('/update_item', methods=['POST'])
+def update_item():
+    title = request.form["title"]
+    description = request.form["description"]
+    size = request.form["size"]
+    category = request.form["category"]
+    price = request.form["price"]
+    _id = request.form["_id"]
+    item = Item(title, description, size, category, price, _id)
+    Database.update(ItemConstants.COLLECTION, {"_id": _id}, item.json())
+    return render_template("home.html")
 
 
 @item_blueprint.route('/view')
