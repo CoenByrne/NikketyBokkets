@@ -1,25 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
     <h1 style="text-align:center;">Shopping Cart</h1>
-    <div style="width:70%;border: 2px solid gray;position:relative;left:15%;right:15%;">
+    <div style="width:70%;border: 2px solid gray;position:relative;left:15%;padding-bottom:70px;">
     {% if items %}
         <div style="width:100%;">
         {% for item in items %}
-            <div style="width:80%;height:50px;border:1px solid gray;padding-left:50px;">
-            <div style="display:inline-block;">
+            <div style="height:50px;padding-left:30px;padding:bottom:10px;padding-top:10px;">
                 <h3 style="padding-left:50px;">{{ item.title }}</h3>
-            </div>
-            <form action="{{ url_for('ShoppingCart.remove_item') }}" method="POST" style="display:inline-block;float:right;padding:20px;">
-                    <button type="submit" name="remove" value="{{ item._id }}">Remove</button>
-            </form>
-            <div style="display:inline-block;float:right;padding-right:70px;padding-top:15px;padding-bottom:15px;">
-                <h4 style="padding-left:50px;">{{ item.price }}</h4>
-            </div>
-            </div>
+                <h4 style="position:relative;left:600px;top:-30px;">{{ item.price }}</h4>
 
+                <form action="{{ url_for('ShoppingCart.remove_item') }}" method="POST" style="position:relative;left:800px;top:-65px;">
+                    <button type="submit" name="remove" value="{{ item._id }}">Remove</button>
+                </form>
+            </div>
         {% endfor %}
         </div>
-        <h3 style="padding-left:50px;padding-right:150px;float:right;">Total: ${{ total }}</h3>
+        <h3 style="padding-left:50px;padding-right:200px;padding-top:10px;float:right;">Total: ${{ total }}</h3>
     {% endif %}
     </div>
 {% endblock %}
