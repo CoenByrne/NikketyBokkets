@@ -1,14 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Shopping Cart</h1>
+    <h1 style="text-align:center;">Shopping Cart</h1>
+    <div style="width:70%;border: 2px solid gray;position:relative;left:15%;right:15%;">
     {% if items %}
+        <div style="width:100%;">
         {% for item in items %}
-            <h3>{{ item.title }}</h3>
-            <h4>{{ item.price }}</h4>
-            <form action="{{ url_for('ShoppingCart.remove_item') }}" method="POST">
+            <div style="width:80%;height:50px;border:1px solid gray;padding-left:50px;">
+            <div style="display:inline-block;">
+                <h3 style="padding-left:50px;">{{ item.title }}</h3>
+            </div>
+            <form action="{{ url_for('ShoppingCart.remove_item') }}" method="POST" style="display:inline-block;float:right;padding:20px;">
                     <button type="submit" name="remove" value="{{ item._id }}">Remove</button>
             </form>
-        {% endfor %}
-    {% endif %}
+            <div style="display:inline-block;float:right;padding-right:70px;padding-top:15px;padding-bottom:15px;">
+                <h4 style="padding-left:50px;">{{ item.price }}</h4>
+            </div>
+            </div>
 
+        {% endfor %}
+        </div>
+        <h3 style="padding-left:50px;padding-right:150px;float:right;">Total: ${{ total }}</h3>
+    {% endif %}
+    </div>
 {% endblock %}

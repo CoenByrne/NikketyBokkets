@@ -13,7 +13,10 @@ def too_cart():
         if "email" in session.keys():
             cart = Database.find_one(ShoppingCartConstants.COLLECTION, {"user_email": session["email"]})
             items = ShoppingCart.find_items(cart)
-            return render_template("shopping_cart.html", items=items)
+            total = 0
+            for item in items:
+                total += float(item["price"])
+            return render_template("shopping_cart.html", items=items, total=total)
         return render_template("shopping_cart.html")
 
 
@@ -29,4 +32,7 @@ def remove_item():
     cart_ids.remove(request.form["remove"])
     Database.update(ShoppingCartConstants.COLLECTION, {"user_email": session["email"]}, cart.json(cart))
     items = ShoppingCart.find_items(cart.json(cart))
-    return render_template("shopping_cart.html", items=items)
+    total = 0
+    for item in items:
+        total += float(item["price"])
+    return render_template("shopping_cart.html", items=items, total=total)

@@ -3,37 +3,39 @@
     <div class="container">
         {% for item in items %}
 
-            <div class="panel panel-primary" style="width:33%;float:left;position:relative;">
+            <div class="panel panel-primary" style="width:28%;float:left;position:relative;">
             {% if item.title %}
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ item.title }}</h3>
+                    <h3 class="panel-title" style="text-align:center;">{{ item.title }}</h3>
                 </div>
             {% endif %}
-            <div class="panel-body">
+            <div class="panel-body" style="height:160px;">
+                <div style="float:left;width:57%;">
+                    <img src="/static/img/ic_insert_photo_black_48dp_2x.png" height="130px" width="130px" style="border:1px solid black;">
+                </div>
+                <div style="width:43%;float:right;padding-top:0px;position:relative;top:-20px;">
+            {% if item.price %}
+                    <h2><strong>${{ item.price }}</strong></h2>
+            {% endif %}
             {% if item.description %}
-                <h5>description: {{ item.description }}</h5>
+                <h5>{{ item.description }}</h5>
             {% endif %}
             {% if item.size %}
                 <h5>size: {{ item.size }}</h5>
             {% endif %}
-            {% if item.category %}
-                <h5>category: {{ item.category }}</h5>
-            {% endif %}
-            {% if item.price %}
-                <h5>price: {{ item.price }}</h5>
-            {% endif %}
-                <form action="{{ url_for('Item.buy_item') }}" method="POST">
+                </div>
+                <form action="{{ url_for('Item.buy_item') }}" method="POST" style="display:inline-block;width:10%;position:relative;top:-20px;">
                     <button type="submit" name="Buy" value="{{ item._id }}">BUY!</button>
                 </form>
                 {% if session["admin"] == True %}
-                <form action="{{ url_for('Item.go_to_update_item') }}" method="POST">
+                <form action="{{ url_for('Item.go_to_update_item') }}" method="POST" style="display:inline-block;padding-left:20px;position:relative;top:-20px;">
                     <button type="submit" name="Edit" value="{{ item._id }}">EDIT</button>
                 </form>
                 {% endif %}
             </div>
             <br>
             </div>
-            <div style="width:0.5%;height:50px;float:left;"></div>
+            <div style="width:5%;height:50px;float:left;"></div>
         {% endfor %}
     </div>
 
