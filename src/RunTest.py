@@ -9,11 +9,9 @@ from src.models.User import UserConstants
 from src.models.Item import ItemConstants
 from src.models.Review import ReviewConstants
 from src.models.ShoppingCart.ShoppingCart import ShoppingCart
-
+from src.models.Order.Order import Order
 Database.initialize()
 
-print(ShoppingCart.find_by_user_id("f0a46fd4725f47dbb47ab6b214c67060"))
-
-items = Item.all_from_category("1")
-for item in items:
-    print(item)
+orders = Order.get_all()
+for order in orders:
+    print(order["last_name"])
